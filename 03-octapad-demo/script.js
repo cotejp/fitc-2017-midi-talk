@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Setup Snap.svg, load Octapad's SVG image and size it to 90%
   snap = Snap(window.innerWidth, window.innerHeight);
   octapad = snap.group();
-  Snap.load("images/octapad.svg", function (image) {
+  Snap.load("images/octapad2.svg", function (image) {
     octapad.append(image);
     octapad.animate({transform: "s.9,.9"}, 1000);
   });
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
       35: "samples/kick.wav",         // PAD5
       38: "samples/snare-clap.wav",   // PAD6
       42: "samples/let-s-do-it.wav",  // PAD7
-      49: "samples/hat-closed.wav"    // PAD8
+      49: "samples/hat.wav"           // PAD8
     };
 
     // Create sample player and map output to master
@@ -55,9 +55,15 @@ document.addEventListener("DOMContentLoaded", function () {
         .attr("fill", "white")
         .animate({fill: "black"}, 500, mina.easeout);
 
+      // Tone magic!!!
+      if (map[e.note.number] === 7) {
+        octapad.select("#pad7")
+          .attr("fill-opacity", "0")
+          .animate({"fill-opacity": "1"}, 750, mina.easeout);
+      }
+
     });
 
   }
 
 });
-
